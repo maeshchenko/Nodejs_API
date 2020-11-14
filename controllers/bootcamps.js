@@ -8,13 +8,15 @@ const Bootcamps = require("../models/Bootcamp");
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
   const bootcamps = await Bootcamps.find();
 
-  res.status(200).json({ status: "success", data: bootcamps });
+  res
+    .status(200)
+    .json({ status: "success", count: bootcamps.length, data: bootcamps });
 });
 
 // @desc       Get single bootcamp
 // @route      GET /api/v1/bootcamps/:id
 // @access     Public
-exports.getBootcamp = asyncHandler(async (req, res, next) => {
+exports.getBootcamp = asyncHandler(async (req, res, next)  => {
   const bootcamp = await Bootcamps.findById(req.params.id);
 
   if (!bootcamp) {
